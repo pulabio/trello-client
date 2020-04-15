@@ -12,7 +12,7 @@ export default class FetchCards extends React.Component{
   }
 
   async componentDidMount(){
-    const query = `cards?limit=${10}`
+    const query = `cards?`
     const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
     const auth = `key=${API_KEY}&token=${API_TOKEN}`;
     const url = base_url+auth;
@@ -27,9 +27,13 @@ export default class FetchCards extends React.Component{
         {this.state.loading || !this.state.cards ? (
           <div>loading...</div> 
         ) : (
-         <div>
-           {this.state.cards.map(card => <div> {card.name}</div>)}
-         </div>)
+         <ul>
+           {this.state.cards.map(card => ( <>
+            <li key={card.id}> {card.name}</li>
+            <li> {card.idShort}</li>
+           </> )
+           )}
+         </ul>)
         }
       </div>
     );
