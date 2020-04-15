@@ -17,7 +17,7 @@ export default class FetchCards extends React.Component{
     const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
     const auth = `key=${API_KEY}&token=${API_TOKEN}`;
     const url = base_url+auth;
-    
+
     const response = await fetch(url);
     const data = await response.json();
     this.setState({cards: data, loading:false})
@@ -31,11 +31,21 @@ export default class FetchCards extends React.Component{
         ) 
         :
         (
-          <div>
+          <div className="container">
+            <table>
+              <thead>
+                <tr>
+                  <th># do card</th>
+                  <th>Nome</th>
+                </tr>
+              </thead>
+              <tbody>
             {this.state.cards.map(card => (
               <CardRow key={card.id} card={card}/>
-            )
-          )}
+              )
+              )}
+              </tbody>
+            </table>
         </div> )
         }
       </div>
