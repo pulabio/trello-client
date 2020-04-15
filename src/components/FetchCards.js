@@ -12,7 +12,7 @@ export default class FetchCards extends React.Component{
   }
 
   async componentDidMount(){
-    const query = `cards?`
+    const query = `cards?customFieldItems=true`
     const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
     const auth = `key=${API_KEY}&token=${API_TOKEN}`;
     const url = base_url+auth;
