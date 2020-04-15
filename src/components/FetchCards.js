@@ -27,13 +27,15 @@ export default class FetchCards extends React.Component{
         {this.state.loading || !this.state.cards ? (
           <div>loading...</div> 
         ) : (
-         <ul>
+         <div>
            {this.state.cards.map(card => ( <>
-            <li key={card.id}> {card.name}</li>
-            <li> {card.idShort}</li>
+           <tr>
+              <td key={card.id}> {card.name}</td>
+              <td> {card.idShort}</td>
+           </tr>
            </> )
            )}
-         </ul>)
+         </div>)
         }
       </div>
     );
