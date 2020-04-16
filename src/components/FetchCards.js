@@ -6,6 +6,8 @@ const API_KEY = config.API.KEY;
 const API_TOKEN = config.API.TOKEN;
 const BOARD_ID = config.BOARD_ID;
 
+const headers = ["# do card", "Nome", "Label", "List"]
+
 export default class FetchCards extends React.Component{
   state = {
     loading:true,
@@ -35,8 +37,9 @@ export default class FetchCards extends React.Component{
             <table>
               <thead>
                 <tr>
-                  <th># do card</th>
-                  <th>Nome</th>
+                  {headers.map(header => (
+                      <th key={header}>{header}</th>
+                    ))}
                 </tr>
               </thead>
               <tbody>
