@@ -3,17 +3,17 @@ import config from '../config';
 import CardRow from './CardRow';
 import load_lists from "../helper_functions/load_lists"
 
-const API_KEY = config.API.KEY;
-const API_TOKEN = config.API.TOKEN;
+
 const BOARD_ID = config.BOARD_ID;
+const auth = config.API;
 
 load_lists()
 
 const headers = ["# do card", "Nome", "Label", "List"]
 
 let board_lists = undefined;
-    if(localStorage.board_lists){
-      board_lists = JSON.parse(localStorage.board_lists);
+if(localStorage.board_lists){
+  board_lists = JSON.parse(localStorage.board_lists);
 }
 
 export default class FetchCards extends React.Component{
@@ -23,13 +23,18 @@ export default class FetchCards extends React.Component{
   }
   
   async componentDidMount(){
+    async function fetchTrello(BOARD_ID, query, auth){
+      const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
+      const authParams = `key=${auth.KEY}&token=${auth.TOKEN}`;
+      const url = base_url+authParams;
+      
+      const response = await fetch(url);
+      return await response.json();
+    }
+    
     const query = `cards?customFieldItems=true`
-    const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
-    const auth = `key=${API_KEY}&token=${API_TOKEN}`;
-    const url = base_url+auth;
-
-    //const list_dict= await load_lists();
-    const response = await fetch(url);
+    const data = await fetchTrello(BOARD_ID, query, auth);//const list_dict= await load_lists();
+    
     const labelFilter = "SEV3 - URGENTE"
     const filtered_cards = data.filter(card => card.labels.some(label=>label.name === labelFilter))
     const sorted_cards = filtered_cards.sort((a,b)=>b.idShort-a.idShort)
