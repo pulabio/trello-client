@@ -3,7 +3,6 @@ import config from '../config';
 import CardRow from './CardRow';
 import {load_lists, buildListDict, fetchTrello} from "../helperFunctions"
 
-
 const BOARD_ID = config.BOARD_ID;
 const auth = config.API;
 
@@ -11,10 +10,6 @@ load_lists()
 
 const headers = ["# do card", "Nome", "Label", "List"]
 
-let board_lists = undefined;
-if(localStorage.board_lists){
-  board_lists = JSON.parse(localStorage.board_lists);
-}
 
 export default class FetchCards extends React.Component{
   state = {
