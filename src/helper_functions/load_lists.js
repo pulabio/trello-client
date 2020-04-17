@@ -22,4 +22,12 @@ async function load_lists(){
   localStorage.setItem("board_lists", stringfied_board_lists);
 }
 
+//const quemSolicitouID = "5a9866f7d6afbd6de1bbc539"
+export function buildListDict(customFieldsDef, fieldID){
+  const dict = {}
+  const fieldDefinitions = customFieldsDef.find(field => field.id===fieldID);
+  fieldDefinitions.options.forEach(option => dict[option.id]=option.value.text);
+  return dict;
+}
+
 export default load_lists;
