@@ -1,12 +1,12 @@
 import React from 'react';
 import config from '../config';
 import CardRow from './CardRow';
-import {load_lists, buildListDict, fetchTrello} from "../helperFunctions"
+import {loadLists, buildListDict, fetchTrello} from "../helperFunctions"
 
 const BOARD_ID = config.BOARD_ID;
 const auth = config.API;
 
-load_lists()
+loadLists()
 
 const headers = ["# do card", "Nome", "Label", "List"]
 
@@ -19,7 +19,7 @@ export default class FetchCards extends React.Component{
   
   async componentDidMount(){
     const query = `cards?customFieldItems=true`
-    const data = await fetchTrello(BOARD_ID, query, auth);//const list_dict= await load_lists();
+    const data = await fetchTrello(BOARD_ID, query, auth);
     
     const labelFilter = "SEV3 - URGENTE"
     const filtered_cards = data.filter(card => card.labels.some(label=>label.name === labelFilter))

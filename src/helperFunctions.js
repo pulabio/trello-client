@@ -25,7 +25,7 @@ export async function loadMembers(){
   localStorage.setItem("board_members", stringfied_board_members);
 }
 
-export async function load_lists(){
+export async function loadLists(){
   const query = "lists?"
   const lists = await fetchTrello(BOARD_ID, query, auth);
 
