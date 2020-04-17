@@ -30,8 +30,10 @@ export default class FetchCards extends React.Component{
 
     //const list_dict= await load_lists();
     const response = await fetch(url);
-    const data = await response.json();
-    this.setState({cards: data, loading:false})
+    const labelFilter = "SEV3 - URGENTE"
+    const filtered_cards = data.filter(card => card.labels.some(label=>label.name === labelFilter))
+    const sorted_cards = filtered_cards.sort((a,b)=>b.idShort-a.idShort)
+    this.setState({cards: sorted_cards, loading:false})
 
     let board_lists = undefined;
     if(localStorage.board_lists){
