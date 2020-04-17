@@ -12,6 +12,19 @@ export async function fetchTrello(BOARD_ID, query, auth){
   return await response.json();
 }
 
+export async function loadMembers(){
+  const query = "memberships?member=true";
+  const members = await fetchTrello(BOARD_ID, query, auth);
+
+  const board_members = {}
+  members.forEach(member => {
+    board_members[member.idMember]=member.member.fullName
+  });
+
+  let stringfied_board_members = JSON.stringify(board_members);
+  localStorage.setItem("board_members", stringfied_board_members);
+}
+
 export async function load_lists(){
   const query = "lists?"
   const lists = await fetchTrello(BOARD_ID, query, auth);
