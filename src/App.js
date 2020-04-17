@@ -5,8 +5,7 @@ import FetchCards from "./components/FetchCards";
 
 function App() {
   return (
-    <div className="App">
-        <h1>Lista de cards</h1>
+    <div>
         <FetchCards/>
     </div>
   );
