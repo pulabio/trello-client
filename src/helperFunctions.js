@@ -1,10 +1,19 @@
-import config from '../config';
+import config from './config';
 
 const API_KEY = config.API.KEY;
 const API_TOKEN = config.API.TOKEN;
 const BOARD_ID = config.BOARD_ID;
 
-async function load_lists(){
+export async function fetchTrello(BOARD_ID, query, auth){
+  const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
+  const authParams = `key=${auth.KEY}&token=${auth.TOKEN}`;
+  const url = base_url+authParams;
+  
+  const response = await fetch(url);
+  return await response.json();
+}
+
+export async function load_lists(){
   const query = "lists?"
   const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
   const auth = `key=${API_KEY}&token=${API_TOKEN}`;

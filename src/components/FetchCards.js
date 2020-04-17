@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config';
 import CardRow from './CardRow';
-import load_lists from "../helper_functions/load_lists"
+import {load_lists, buildListDict, fetchTrello} from "../helperFunctions"
 
 
 const BOARD_ID = config.BOARD_ID;
@@ -23,15 +23,6 @@ export default class FetchCards extends React.Component{
   }
   
   async componentDidMount(){
-    async function fetchTrello(BOARD_ID, query, auth){
-      const base_url = `https://api.trello.com/1/boards/${BOARD_ID}/${query}&`;
-      const authParams = `key=${auth.KEY}&token=${auth.TOKEN}`;
-      const url = base_url+authParams;
-      
-      const response = await fetch(url);
-      return await response.json();
-    }
-    
     const query = `cards?customFieldItems=true`
     const data = await fetchTrello(BOARD_ID, query, auth);//const list_dict= await load_lists();
     
