@@ -38,6 +38,14 @@ export async function loadLists(){
   localStorage.setItem("board_lists", stringfied_board_lists);
 }
 
+export async function loadCustomFieldsDef(){
+  const query = "customFields?"
+  const customFieldsDef = await fetchTrello(BOARD_ID, query, auth);
+
+  const stringfiedCustomFieldDef = JSON.stringify(customFieldsDef);
+  localStorage.setItem("customFieldsDef", stringfiedCustomFieldDef);
+  return customFieldsDef;
+}
 //const quemSolicitouID = "5a9866f7d6afbd6de1bbc539"
 export function buildListDict(customFieldsDef, fieldID){
   const dict = {}
