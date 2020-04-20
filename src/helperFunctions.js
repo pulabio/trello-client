@@ -16,26 +16,26 @@ export async function loadMembers(){
   const query = "memberships?member=true";
   const members = await fetchTrello(BOARD_ID, query, auth);
 
-  const board_members = {}
+  const boardMembers = {}
   members.forEach(member => {
-    board_members[member.idMember]=member.member.fullName
+    boardMembers[member.idMember]=member.member.fullName
   });
-
-  let stringfied_board_members = JSON.stringify(board_members);
-  localStorage.setItem("board_members", stringfied_board_members);
+  let stringfiedBoardMembers = JSON.stringify(boardMembers);
+  localStorage.setItem("boardMembers", stringfiedBoardMembers);
+  return boardMembers;
 }
 
 export async function loadLists(){
   const query = "lists?"
   const lists = await fetchTrello(BOARD_ID, query, auth);
 
-  const board_lists = {}
+  const boardLists = {}
   lists.forEach(list => {
-    board_lists[list.id] = list.name  
+    boardLists[list.id] = list.name  
   });
 
-  let stringfied_board_lists = JSON.stringify(board_lists);
-  localStorage.setItem("board_lists", stringfied_board_lists);
+  const stringfiedBoardLists = JSON.stringify(boardLists);
+  localStorage.setItem("boardLists", stringfiedBoardLists);
 }
 
 export async function loadCustomFieldsDef(){
