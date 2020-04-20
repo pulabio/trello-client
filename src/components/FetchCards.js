@@ -39,7 +39,7 @@ export default class FetchCards extends React.Component{
     return(
       <div>
         {this.state.loading || !this.state.cards ? (
-          <div>loading...</div> 
+          <div className="container"><b>loading...</b></div> 
         ) 
         :
         (
