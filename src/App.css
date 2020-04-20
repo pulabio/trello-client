@@ -30,7 +30,7 @@ td {
   color: #fff;
 }
 th {
-  text-align: left;
+  text-align: center;
 }
 thead th {
   background-color: #55608f;
@@ -40,6 +40,7 @@ tbody tr:hover {
 }
 tbody td {
   position: relative;
+  text-align: center;
 }
 tbody td:hover:before {
   content: "";
