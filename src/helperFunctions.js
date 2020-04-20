@@ -12,6 +12,12 @@ export async function fetchTrello(BOARD_ID, query, auth){
   return await response.json();
 }
 
+export async function loadCards(){
+  const query = `cards?customFieldItems=true&card_members=true`;
+  const cards = await fetchTrello(BOARD_ID, query, auth);
+  return cards;
+}
+
 export async function loadMembers(){
   const query = "memberships?member=true";
   const members = await fetchTrello(BOARD_ID, query, auth);
