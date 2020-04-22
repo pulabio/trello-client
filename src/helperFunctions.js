@@ -42,6 +42,7 @@ export async function loadLists(){
 
   const stringfiedBoardLists = JSON.stringify(boardLists);
   localStorage.setItem("boardLists", stringfiedBoardLists);
+  return boardLists;
 }
 
 export async function loadCustomFieldsDef(){
