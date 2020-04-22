@@ -7,7 +7,9 @@ export default function Table(props) {
   return(
     <table>
       <TableHeader headerItems={headerItems}/>
-      {rows.map(rowItems => <TableRow rowItems={rowItems} />) }
+      <tbody>
+        {rows.map(rowItems => <TableRow rowItems={rowItems} />) }
+      </tbody>
     </table>
   )
 }
