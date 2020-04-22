@@ -60,3 +60,23 @@ export function buildListDict(customFieldsDef, fieldID){
   fieldDefinitions.options.forEach(option => dict[option.id]=option.value.text);
   return dict;
 }
+
+export async function buildCustomFieldDicts(){
+  const ids = [];
+  const dicts = {};
+
+  const loadedDefs = await loadCustomFieldsDef();
+  loadedDefs.forEach(loadedDef => {
+    ids.push(loadedDef.id);
+    if(loadedDef.options){
+      const id = loadedDef.id;
+      const dict = {};
+      
+      loadedDef.options.forEach(
+        option => dict[option.id]=option.value.text
+      );
+      dicts[id]= dict;
+    }
+  })
+  return { ids, dicts}
+}
