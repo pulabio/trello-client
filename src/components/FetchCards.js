@@ -1,14 +1,14 @@
 import React from 'react';
 import config from '../config';
 import CardRow from './CardRow';
-import {loadLists, buildListDict, fetchTrello} from "../helperFunctions"
+import {loadLists, loadCards} from "../helperFunctions"
 
 const BOARD_ID = config.BOARD_ID;
 const auth = config.API;
 
 loadLists()
 
-const headers = ["# do card", "Nome", "Label", "List"]
+const headers = ["Item", "Cliente", "Solicitante", "Card", "Responsável", "Situação(Fila)", "SEV3"]
 
 
 export default class FetchCards extends React.Component{
@@ -20,21 +20,24 @@ export default class FetchCards extends React.Component{
   async componentDidMount(){
     const data = await loadCards();
     
-    const labelFilter = "SEV3 - URGENTE"
-    const filtered_cards = data.filter(card => card.labels.some(label=>label.name === labelFilter))
+    const F0ErrosId= "595e732a623af5c693244b2c"
+
+    const labelFilter = "SEV3 - URGENTE";
+    let filtered_cards = data.filter(card => card.labels.some(label=>label.name === labelFilter))
+    filtered_cards = filtered_cards.filter(card => card.idList === F0ErrosId);
     const sorted_cards = filtered_cards.sort((a,b)=>b.idShort-a.idShort)
     this.setState({cards: sorted_cards, loading:false})
 
-    let board_lists = undefined;
-    if(localStorage.board_lists){
-      board_lists = await JSON.parse(localStorage.board_lists);
+    let boardLists = undefined;
+    if(localStorage.boardLists){
+      boardLists = await JSON.parse(localStorage.boardLists);
     }
 
-    this.setState({board_lists: board_lists})
+    this.setState({boardLists: boardLists})
   }
 
   render(){
-    const board_lists = this.state.board_lists;
+    const boardLists = this.state.boardLists;
     return(
       <div>
         {this.state.loading || !this.state.cards ? (
@@ -53,7 +56,7 @@ export default class FetchCards extends React.Component{
               </thead>
               <tbody>
             {this.state.cards.map(card => (
-              <CardRow key={card.id} card={card} board_lists={board_lists}/>
+              <CardRow key={card.id} card={card} boardLists={boardLists}/>
               )
               )}
               </tbody>

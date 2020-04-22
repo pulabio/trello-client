@@ -7,7 +7,6 @@ import BoardTableContainer from "./components/BoardTableContainer";
 function App() {
   return (
     <div>
-      <BoardTableContainer />
       <FetchCards/>
     </div>
   );
