@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import {loadLists, loadCards, loadMembers, buildCustomFieldDicts} from "../helperFunctions"
+import Table from "../components/Table"
 
 export default function BoardTableContainer() {
   const [cards, setCards] = useState([]);
@@ -18,6 +19,6 @@ export default function BoardTableContainer() {
 
 
   }, []);
-  return null;
+  return (<Table headerItems={[4,3,2,1]} rows={[[1,2,3,4],[2,3,4,5],[3,4,5,6]]} />);
 
 }
